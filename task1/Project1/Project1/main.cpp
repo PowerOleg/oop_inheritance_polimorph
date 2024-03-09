@@ -4,15 +4,22 @@ class Figure
 {
 protected:
 	int sides;
+	std::string name;
 public:
 	Figure()
 	{
-		sides = 0;
+		this->sides = 0;
+		this->name = "Фигура";
 	}
 
 	int getSides()
 	{
 		return this->sides;
+	}
+
+	std::string getName()
+	{
+		return this->name;
 	}
 };
 
@@ -21,7 +28,8 @@ class Triangle: public Figure
 public:
 	Triangle()
 	{
-		sides = 3;
+		this->sides = 3;
+		this->name = "Треугольник";
 	}
 };
 
@@ -30,7 +38,8 @@ class Quadrangle: public Figure
 public:
 	Quadrangle()
 	{
-		sides = 4;
+		this->sides = 4;
+		this->name = "Четырехугольник";
 	}
 };
 
@@ -41,8 +50,8 @@ int main(int argc, char** argv)
 	Figure fig;
 	Triangle tri;
 	Quadrangle quad;
-	std::cout << "Количество сторон: " << std::endl << "Фигура: " << fig.getSides() << std::endl;
-	std::cout << "Треугольник: " << tri.getSides() << std::endl;
-	std::cout << "Четырёхугольник: " << quad.getSides() << std::endl;
+	std::cout << "Количество сторон: " << std::endl << fig.getName() <<": " << fig.getSides() << std::endl;
+	std::cout << tri.getName() << ": " << tri.getSides() << std::endl;
+	std::cout << quad.getName() << ": " << quad.getSides() << std::endl;
 	return 0;
 }
