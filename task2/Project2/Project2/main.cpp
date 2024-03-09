@@ -107,7 +107,6 @@ public:
 	}
 };
 
-
 class Rectangle: public Quadrangle
 {
 public:
@@ -117,16 +116,32 @@ public:
 	}
 };
 
+class Square: public Quadrangle
+{
+public:
+	Square(int side_a) : Quadrangle(side_a, side_a, side_a, side_a, 90, 90, 90, 90)
+	{
+		this->name = "Квадрат";
+	}
+};
 
+class Parallelogram: public Quadrangle
+{
+public:
+	Parallelogram(int side_a, int side_b, int angle_a, int angle_b) : Quadrangle(side_a, side_b, side_a, side_b, angle_a, angle_b, angle_a, angle_b)
+	{
+		this->name = "Параллелограмм";
+	}
+};
 
-
-
-
-
-
-
-
-
+class Rhombus: public Quadrangle
+{
+public:
+	Rhombus(int side_a, int angle_a, int angle_b) : Quadrangle(side_a, side_a, side_a, side_a, angle_a, angle_b, angle_a, angle_b)
+	{
+		this->name = "Ромб";
+	}
+};
 
 void print_info(Triangle* figure)
 {
@@ -152,15 +167,22 @@ int main(int argc, char** argv)
 	print_info(eq_tri);
 	std::cout << std::endl;
 
-
 	Quadrangle* quad = new Quadrangle(10, 20, 30, 40, 50, 60, 125, 125);
 	Rectangle* rectangle = new Rectangle(10, 20);
+	Square* square = new Square(10);
+	Parallelogram* parallelogram = new Parallelogram(10, 30, 150, 30);
+	Rhombus* rhombus = new Rhombus(20, 20, 160);
 
 	print_info(quad);
 	std::cout << std::endl;
 	print_info(rectangle);
 	std::cout << std::endl;
-
+	print_info(square);
+	std::cout << std::endl;
+	print_info(parallelogram);
+	std::cout << std::endl;
+	print_info(rhombus);
+	std::cout << std::endl;
 
 	delete tri;
 	delete right_tri;
@@ -168,5 +190,8 @@ int main(int argc, char** argv)
 	delete eq_tri;
 	delete quad;
 	delete rectangle;
+	delete square;
+	delete parallelogram;
+	delete rhombus;
 	return 0;
 }
