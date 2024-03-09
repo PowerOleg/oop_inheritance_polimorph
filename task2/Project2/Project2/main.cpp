@@ -34,14 +34,38 @@ protected:
 	int angle_b;
 	int angle_c;
 public:
-	Triangle()
+	Triangle(int side_a, int side_b, int side_c, int angle_a, int angle_b, int angle_c)
 	{
 		this->sides = 3;
 		this->name = "Треугольник";
+		this->side_a = side_a;
+		this->side_b = side_b;
+		this->side_c = side_c;
+		this->angle_a = angle_a;
+		this->angle_b = angle_b;
+		this->angle_c = angle_c;
+		
+	}
+
+	virtual void print_side_values()
+	{
+		std::cout << "Стороны: " << "a=" << this->side_a << " b=" << this->side_b << " c=" << this->side_c << std::endl;
+	}
+	virtual void print_angle_values()
+	{
+		std::cout << "Углы: " << "A=" << this->angle_a << " B=" << this->angle_b << " C=" << this->angle_c << std::endl;
 	}
 };
 
-class Quadrangle: public Figure
+class Equilateral_triangle : public Triangle
+{
+public:
+	Equilateral_triangle(int side_a, int side_b, int angle_a, int angle_b) : Triangle(side_a, side_b, side_a, angle_a, angle_b, angle_a)
+	{
+	}
+};
+
+/*class Quadrangle : public Triangle
 {
 protected:
 	int side_d;
@@ -52,21 +76,48 @@ public:
 		this->sides = 4;
 		this->name = "Четырехугольник";
 	}
-};
 
-void print_info(Figure* figure)
+	void print_side_values() override
+	{
+		std::cout << "Стороны: " << "a=" << side_a << "b=" << side_b << "c=" << side_c << "d=" << side_d << std::endl;
+	}
+	void print_angle_values() override
+	{
+		std::cout << "Углы: " << "A=" << angle_a << "B=" << angle_b << "C=" << angle_c << "D=" << angle_d << std::endl;
+	}
+};*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+void print_info(Triangle* figure)
 {
-
+	std::cout << figure->getName() << ": " << std::endl;
+	figure->print_side_values();
+	figure->print_angle_values();
 }
 
 int main(int argc, char** argv)
 {
 	setlocale(LC_ALL, "ru");
-	Figure fig;
-	Triangle tri;
-	Quadrangle quad;
-	std::cout << "Количество сторон: " << std::endl << fig.getName() << ": " << fig.getSides() << std::endl;
-	std::cout << tri.getName() << ": " << tri.getSides() << std::endl;
-	std::cout << quad.getName() << ": " << quad.getSides() << std::endl;
+	Triangle* tri = new Triangle(10, 20, 30, 50, 60, 70);
+	//Quadrangle* quad = new Quadrangle();
+	Equilateral_triangle* eq_tri = new Equilateral_triangle(10, 20, 50, 60);
+	print_info(tri);
+	std::cout << std::endl;
+	print_info(eq_tri);
+	std::cout << std::endl;
+
+	delete tri;
+	delete eq_tri;
 	return 0;
 }
