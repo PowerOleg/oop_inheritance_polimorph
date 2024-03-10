@@ -151,6 +151,12 @@ public:
 	{
 		std::cout << "Углы: " << "A=" << angle_a << " B=" << angle_b << " C=" << angle_c << " D=" << angle_d << std::endl;
 	}
+
+	bool check() override
+	{
+		return this->getSides() == 4 && this->getSides() * 90 == this->angle_a + this->angle_b + this->angle_c + this->angle_d;
+	}
+
 };
 
 class Rectangle : public Quadrangle
@@ -159,6 +165,11 @@ public:
 	Rectangle(int side_a, int side_b) : Quadrangle(side_a, side_b, side_a, side_b, 90, 90, 90, 90)
 	{
 		this->name = "Прямоугольник";
+	}
+
+	bool check() override
+	{
+		return Quadrangle::check() && this->side_a == this->side_c && this->side_b == this->side_d && this->angle_a == this->angle_c && this->angle_b == this->angle_d;
 	}
 };
 
@@ -169,6 +180,11 @@ public:
 	{
 		this->name = "Квадрат";
 	}
+
+	bool check() override
+	{
+		return Quadrangle::check() && this->side_a == this->side_b && this->side_a == this->side_c && this->angle_a == this->angle_b && this->angle_a == this->angle_c;
+	}
 };
 
 class Parallelogram : public Quadrangle
@@ -178,6 +194,11 @@ public:
 	{
 		this->name = "Параллелограмм";
 	}
+
+	bool check() override
+	{
+		return Quadrangle::check() && this->side_a == this->side_c && this->side_b == this->side_d && this->angle_a == this->angle_c && this->angle_b == this->angle_d;
+	}
 };
 
 class Rhombus : public Quadrangle
@@ -186,6 +207,11 @@ public:
 	Rhombus(int side_a, int angle_a, int angle_b) : Quadrangle(side_a, side_a, side_a, side_a, angle_a, angle_b, angle_a, angle_b)
 	{
 		this->name = "Ромб";
+	}
+
+	bool check() override
+	{
+		return Quadrangle::check() && this->side_a == this->side_b && this->side_a == this->side_c && this->angle_a == this->angle_c && this->angle_b == this->angle_d;
 	}
 };
 
@@ -197,6 +223,11 @@ int main(int argc, char** argv)
 	Right_triangle* right_tri = new Right_triangle(10, 20, 30, 30, 60);
 	Isosceles_triangle* iso_tri = new Isosceles_triangle(10, 20, 50, 80);
 	Equilateral_triangle* eq_tri = new Equilateral_triangle(30, 60);
+	Quadrangle* quad = new Quadrangle(10, 20, 30, 40, 50, 60, 125, 125);
+	Rectangle* rectangle = new Rectangle(10, 20);
+	Square* square = new Square(10);
+	Parallelogram* parallelogram = new Parallelogram(10, 30, 150, 30);
+	Rhombus* rhombus = new Rhombus(20, 20, 160);
 
 	fig->print_info();
 	std::cout << std::endl;
@@ -207,23 +238,26 @@ int main(int argc, char** argv)
 	iso_tri->print_info(); 
 	std::cout << std::endl;
 	eq_tri->print_info();
-
-	//Quadrangle* quad = new Quadrangle(10, 20, 30, 40, 50, 60, 125, 125);
-	//Rectangle* rectangle = new Rectangle(10, 20);
-	//Square* square = new Square(10);
-	//Parallelogram* parallelogram = new Parallelogram(10, 30, 150, 30);
-	//Rhombus* rhombus = new Rhombus(20, 20, 160);
-
+	std::cout << std::endl;
+	quad->print_info();
+	std::cout << std::endl;
+	rectangle->print_info();
+	std::cout << std::endl;
+	square->print_info();
+	std::cout << std::endl;
+	parallelogram->print_info();
+	std::cout << std::endl;
+	rhombus->print_info();
 
 	delete fig;
 	delete tri;
 	delete right_tri;
 	delete iso_tri;
 	delete eq_tri;
-	//delete quad;
-	//delete rectangle;
-	//delete square;
-	//delete parallelogram;
-	//delete rhombus;
+	delete quad;
+	delete rectangle;
+	delete square;
+	delete parallelogram;
+	delete rhombus;
 	return 0;
 }
